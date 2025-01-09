@@ -1,0 +1,83 @@
+[project]
+name = "ia-manager"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.0",
+    "google-generativeai>=0.8.3",
+    "gradio>=5.10.0",
+]
+
+[dependency-groups]
+dev = ["pre-commit>=4.0.1", "pytest>=8.3.4", "ruff>=0.8.6"]
+
+
+[tool.ruff]
+line-length = 79
+exclude = [
+    "*.eggs",
+    "*.git",
+    "*.hg",
+    "*.mypy_cache",
+    "*.nox",
+    "*.tox",
+    "*.venv",
+    "*.svn",
+    " _build",
+    "buck-out",
+    "build",
+    "dist",
+    ".*venv.*",
+]
+
+[tool.isort]
+profile = "black"
+line_length = 79
+
+[tool.ruff.lint]
+select = [
+    "ANN001",
+    "ANN002",
+    "ANN003",
+    "ARG",
+    "E",
+    "ERA",
+    "F",
+    "I",
+    "N801",
+    "N802",
+    "N803",
+    "PT",
+    "S",
+    "SIM",
+]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "ANN", "S", "ARG"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+[tool.mypy]
+disallow_untyped_defs = true
+follow_imports = "silent"
+ignore_errors = false
+ignore_missing_imports = true
+show_error_codes = true
+
+# Enable pydantic mypy plugin.
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+filterwarnings = [
+    "ignore:.*The event_loop fixture provided by pytest-asyncio has been redefined in.*:DeprecationWarning",
+    "ignore:.*The kwargs-based syntax for TypedDict definitions is deprecated.*:DeprecationWarning:dyna_kafka",
+]
